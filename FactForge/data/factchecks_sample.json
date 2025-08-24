@@ -1,0 +1,12 @@
+[
+  {
+    "claim": "Drinking hot water cures COVID",
+    "label": "false",
+    "source": "WHO"
+  },
+  {
+    "claim": "The Earth orbits the Sun",
+    "label": "true",
+    "source": "NASA"
+  }
+]
