@@ -1,15 +1,17 @@
-
 import React from 'react'
 import SourceBadge from './SourceBadge'
 
-export default function ResultCard({ data }:{ data:any }){
+export default function ResultCard({ data }:{ data:any }) {
   return (
     <div>
       <h2>Results</h2>
+      
       <div style={{marginTop:12}}>
         <h3>Claims</h3>
         <ul>
-          {data.claims?.map((c:any, idx:number)=>(<li key={idx}>• {c.text}</li>))}
+          {data.claims?.map((c:any, idx:number)=>(
+            <li key={idx}>• {c.text}</li>
+          ))}
         </ul>
       </div>
 
@@ -18,7 +20,8 @@ export default function ResultCard({ data }:{ data:any }){
         <ul>
           {data.verdicts?.map((v:any, idx:number)=>(
             <li key={idx}>
-              <span className="badge">{v.label.toUpperCase()}</span> {v.claim} <em>({Math.round(v.confidence*100)}%)</em>
+              <span className={`badge ${v.label}`}>{v.label.toUpperCase()}</span>
+              {v.claim} <em>({Math.round(v.confidence*100)}%)</em>
             </li>
           ))}
         </ul>
@@ -27,7 +30,9 @@ export default function ResultCard({ data }:{ data:any }){
       <div style={{marginTop:12}}>
         <h3>Explanations</h3>
         <ul>
-          {data.explanations?.map((e:any, idx:number)=>(<li key={idx}>{e.text}</li>))}
+          {data.explanations?.map((e:any, idx:number)=>(
+            <li key={idx}>{e.text}</li>
+          ))}
         </ul>
       </div>
 
