@@ -1,18 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
-const API = import.meta.env.VITE_API_BASE || 'http://localhost:8000'
+import React from "react";
 
-export default function Leaderboard(){
-  const [rows,setRows]=useState<any[]>([])
-  useEffect(()=>{ axios.get(`${API}/leaderboard/top`).then(r=>setRows(r.data)).catch(()=>{}) },[])
+export default function Leaderboard() {
+  const mockData = [
+    { user: "Alice", checks: 20 },
+    { user: "Bob", checks: 15 },
+    { user: "Charlie", checks: 12 },
+  ];
+
   return (
-    <div>
-      <h1>Leaderboard</h1>
-      <div>
-        {rows.map((r:any,i:number)=>(
-          <div className="card" key={i}><strong>{i+1}. {r.user}</strong><div>Analyses: {r.count}</div></div>
+    <div className="max-w-2xl mx-auto py-8">
+      <h2 className="text-2xl font-bold mb-4">Leaderboard</h2>
+      <ul className="border rounded divide-y">
+        {mockData.map((row, i) => (
+          <li key={i} className="p-3 flex justify-between">
+            <span>{row.user}</span>
+            <span>{row.checks} checks</span>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
-  )
+  );
 }

@@ -1,20 +1,44 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-const API = import.meta.env.VITE_API_BASE || 'http://localhost:8000'
+import React, { useState } from "react";
+import { registerUser } from "../services/api";
+import { useNavigate } from "react-router-dom";
 
-export default function Register(){
-  const [email,setEmail]=useState(''); const [password,setPassword]=useState(''); const [loading,setLoading]=useState(false)
-  const register = async ()=>{ setLoading(true); try{ await axios.post(`${API}/auth/register`, {email,password}); alert('Registered — now login'); window.location.href='/login' }catch(e:any){ alert(e?.response?.data?.detail || 'Register failed') }finally{ setLoading(false) } }
+export default function Register() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await registerUser(username, password);
+      alert("Registration successful! Please login.");
+      navigate("/login");
+    } catch {
+      alert("Registration failed");
+    }
+  };
+
   return (
-    <div className="card" style={{maxWidth:520,margin:'40px auto'}}>
-      <h2>Register</h2>
-      <div style={{display:'grid',gap:12}}>
-        <input className="text" placeholder="Email" value={email} onChange={e=>setEmail(e.target.value)} />
-        <input className="text" placeholder="Password" type="password" value={password} onChange={e=>setPassword(e.target.value)} />
-        <div style={{display:'flex',gap:12}}>
-          <button className="button" onClick={register} disabled={!email||!password||loading}>{loading?'...':'Register'}</button>
-        </div>
-      </div>
+    <div className="flex justify-center items-center h-[70vh]">
+      <form onSubmit={handleSubmit} className="p-6 shadow-lg rounded bg-white w-96">
+        <h2 className="text-xl font-bold mb-4">Register</h2>
+        <input
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Username"
+          className="w-full p-2 border mb-3 rounded"
+        />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          placeholder="Password"
+          className="w-full p-2 border mb-3 rounded"
+        />
+        <button type="submit" className="w-full bg-green-600 text-white p-2 rounded">
+          Register
+        </button>
+      </form>
     </div>
-  )
+  );
 }
