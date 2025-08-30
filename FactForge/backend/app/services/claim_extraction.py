@@ -1,17 +1,15 @@
 from typing import List
-from ..models.schemas import Claim
+from ..models import Claim
+import re
 
-# For hackathon: simple heuristic first, can be swapped with GPT.
 def extract_claims(text: str) -> List[Claim]:
-    sentences = [s.strip() for s in text.replace('\n', ' ').split('.') if s.strip()]
+    text = re.sub('\\s+', ' ', text.strip())
+    sentences = [s.strip() for s in re.split(r'[.?!]\s*', text) if s.strip()]
     claims = []
-
     for s in sentences:
-        if len(s.split()) > 3:  # ignore too-short phrases
+        # heuristics: sentences with 'cause', 'cure', 'percent', 'increase', 'decrease', numbers, 'is', 'are'
+        if len(s.split()) >= 4 and any(k in s.lower() for k in ['cause','cure','percent','increase','decrease','leads to','is','are','will']):
             claims.append(Claim(text=s))
-
-    # fallback
     if not claims and sentences:
         claims.append(Claim(text=sentences[0]))
-
     return claims
