@@ -1,0 +1,14 @@
+:root{font-family:Inter,system-ui,Avenir,Helvetica,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;background:#0b0e14;color:#e6e6e6}a{color:inherit}
+.container{max-width:1100px;margin:0 auto;padding:24px}
+.card{background:#121826;border:1px solid #1f2937;border-radius:12px;padding:18px;margin-bottom:14px}
+.nav{background:#071029;border-bottom:1px solid #1f2937}
+.nav-inner{max-width:1100px;margin:0 auto;padding:12px 24px;display:flex;justify-content:space-between;align-items:center}
+.brand{font-weight:800}
+.button{padding:8px 12px;border-radius:10px;border:1px solid #334155;background:#1f2937;color:#e6e6e6;cursor:pointer}
+.input{width:100%;min-height:100px;border-radius:10px;padding:10px;border:1px solid #334155;background:#0b0e14;color:#e6e6e6}
+.text{width:100%;height:42px;border-radius:10px;padding:8px;border:1px solid #334155;background:#0b0e14;color:#e6e6e6}
+.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;margin-right:8px;border:1px solid #334155}
+.badge.true{background:#065f46;color:#d1fae5}
+.badge.false{background:#7f1d1d;color:#fecaca}
+.badge.needs_review{background:#92400e;color:#fef3c7}
+.footer{border-top:1px solid #1f2937;padding:12px 24px;text-align:center;opacity:.7}
